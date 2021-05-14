@@ -10,6 +10,7 @@
 #pragma once
 
 #include "Pokemon.hpp"
+#include "Pokemoncardgenerator.hpp"
 #include "Exceptions.hpp"
 #include "tchar_templates.hpp"
 #include <boost/format.hpp>
