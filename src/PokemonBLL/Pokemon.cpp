@@ -18,9 +18,9 @@ Pokemon::Pokemon(const PokemonMonstro& monstro, const Status status, const BLL::
     : m_monstro(monstro), m_status(status), m_jogador(jogador), m_caracteristica_rodada(caracteristica_rodada)
 {}
 
+// O cálculo aqui considera também a vantagem do Tipo.
 Pokemon& Pokemon::getvencedorrodada(Pokemon& adversario)
 {
-    float vantagem = this->temvantagem(adversario) ? 1.5f : 1.0f;
     float valoradversario = 0.0f;
     float valor = 0.0f;
 
@@ -28,31 +28,34 @@ Pokemon& Pokemon::getvencedorrodada(Pokemon& adversario)
     {
         case Caracteristica::Ataque:
             valoradversario = (float)adversario.get_ataque();
-            valor = (float)adversario.get_ataque();
+            valor = (float)this->get_ataque();
             break;
         case Caracteristica::Defesa:
             valoradversario = (float)adversario.get_defesa();
-            valor = (float)adversario.get_defesa();
+            valor = (float)this->get_defesa();
             break;
         case Caracteristica::Agilidade:
             valoradversario = (float)adversario.get_agilidade();
-            valor = (float)adversario.get_agilidade();
+            valor = (float)this->get_agilidade();
             break;
         case Caracteristica::HP:
             valoradversario = (float)adversario.get_hp();
-            valor = (float)adversario.get_hp();
+            valor = (float)this->get_hp();
             break;
         default:
             return *this;
     };
 
-    if((valor * vantagem) > valoradversario)
+    valor = valor * (this->temvantagem(adversario) ? 1.5f : 1.0f);
+    valoradversario = valoradversario * (adversario.temvantagem(*this) ? 1.5f : 1.0f);
+
+    if(valor > valoradversario)
     {
         this->set_status(Status::Ativo);
         adversario.set_status(Status::Desmaiado);
         return *this;
     }
-    else if((valor * vantagem) < valoradversario)
+    else if(valor < valoradversario)
     {
         this->set_status(Status::Desmaiado);
         adversario.set_status(Status::Ativo);
@@ -85,6 +88,7 @@ float Pokemon::getadversariopontos(const Pokemon& adversario) const
     };
 }
 
+// Checa-se aqui se a vantagem existe para o tipo de Pokemon.
 bool Pokemon::temvantagem(const Pokemon& adversario)
 {
     switch(this->get_tipo())
@@ -167,5 +171,7 @@ void Pokemon::set_status(const Status status)
 void Pokemon::set_tipo(const Tipo tipo)
 {this->m_monstro.m_tipo = tipo;}
 
+bool Pokemon::podejogar() const
+{return this->m_status == Status::Ativo;}
 
 } /* namespace BLL */

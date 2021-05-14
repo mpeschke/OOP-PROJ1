@@ -19,17 +19,20 @@ class Jogo {
 protected:
     Jogo();
 public:
-    Jogo(const bool computadorjoga);
+    Jogo(const bool computadorjoga, const unsigned int numero_cartas_pras_rodadas);
 protected:
     std::vector<Pokemonrodada> m_rodadas;
     bool m_computadorjoga;
+    unsigned int m_numero_cartas_pras_rodadas;
 public:
     std::vector<Pokemonrodada>& get_rodadas();
     const bool get_computadorjoga() const;
     void set_rodadas(const std::vector<Pokemonrodada>& rodadas);
     void set_computadorjoga(const bool computadorjoga);
-    bool tem_vencedor() const;
-    BLL::tstring get_vencedor() const;
+    bool tem_vencedor(const std::vector<Pokemon>& maojogador1, const std::vector<Pokemon>& maojogador2) const;
+    BLL::tstring get_vencedor(const std::vector<Pokemon>& maojogador1, const std::vector<Pokemon>& maojogador2) const;
+public:
+    bool continuarjogando(const std::vector<Pokemon>& maojogador1, const std::vector<Pokemon>& maojogador2) const;
 public:
     virtual ~Jogo();
 };

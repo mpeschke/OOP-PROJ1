@@ -80,6 +80,7 @@ public:
     Pokemon& getvencedorrodada(Pokemon& adversario);
     bool temvantagem(const Pokemon& adversario);
     float getadversariopontos(const Pokemon& adversario) const;
+    bool podejogar() const;
 public:
     virtual ~Pokemon();
 };

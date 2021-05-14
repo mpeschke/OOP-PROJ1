@@ -18,11 +18,10 @@ namespace BLL {
 class Pokemonrodada {
 public:
     Pokemonrodada();
-    Pokemonrodada(const Pokemon& pokemon1, const Pokemon& pokemon2, const Caracteristica caracteristica_escolhida);
+    Pokemonrodada(Pokemon& pokemon1, Pokemon& pokemon2, const Caracteristica caracteristica_escolhida);
 protected:
-    Pokemon m_pokemon1;
-    Pokemon m_pokemon2;
-    Pokemon m_vencedor;
+    Pokemon* m_pokemon1;
+    Pokemon* m_pokemon2;
     bool m_jogado;
     Caracteristica m_caracteristica_escolhida;
 public:
@@ -30,11 +29,13 @@ public:
     bool get_jogado() const;
     Caracteristica get_caracteristica_escolhida() const;
 
-    void set_vencedor(const Pokemon& pokemon);
     void set_jogado(const bool jogado);
     void set_caracteristica_escolhida(const Caracteristica caracteristica);
 public:
     void jogar();
+    bool empate() const;
+    bool jogador1_venceu() const;
+    bool jogador2_venceu() const;
 public:
     virtual ~Pokemonrodada();
 };

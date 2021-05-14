@@ -15,5 +15,6 @@
 #include <algorithm>
 #include <fstream>
 #include "Pokemon.hpp"
+#include "Pokemoncardgenerator.hpp"
 #include "Jogo.hpp"
 #include "tchar_templates.hpp"

@@ -191,7 +191,11 @@ static const std::vector<Pokemon> g_Monstros{
     g_Maril
 };
 
-void g_GerarRodadas(const BLL::tstring jogador1, const BLL::tstring jogador2, std::vector<Pokemonrodada>* rodadas)
+// Usando aqui o gerador de números pseudo-aleatórios baseado no Mersenne Twister (https://en.wikipedia.org/wiki/Mersenne_Twister).
+// Notar que o algoritmo REALMENTE simula uma distribuição manual de cartas, com as cartas
+// sendo 'retiradas do topo' do baralho. Com a diferença que se passam as cartas primeiro para
+// um jogador, depois para outro.
+void g_DistribuirCartas(const BLL::tstring jogador1, const BLL::tstring jogador2, std::vector<Pokemon>* cartasjogador1, std::vector<Pokemon>* cartasjogador2)
 {
     std::vector<int> v = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     std::random_device rd;
@@ -199,17 +203,12 @@ void g_GerarRodadas(const BLL::tstring jogador1, const BLL::tstring jogador2, st
 
     std::shuffle(v.begin(), v.end(), g);
 
-    std::vector<Pokemon> cartasjogador1;
-    std::vector<Pokemon> cartasjogador2;
-
     for(int i = 0; i < 6; i++)
     {
-        cartasjogador1.push_back(g_Monstros[v[i]]);
-        cartasjogador1[i].set_jogador(jogador1);
-        cartasjogador2.push_back(g_Monstros[v[i+6]]);
-        cartasjogador2[i].set_jogador(jogador2);
-        Pokemonrodada item = Pokemonrodada(cartasjogador1[i], cartasjogador2[i], Caracteristica::Indefinido);
-        rodadas->push_back(item);
+        cartasjogador1->push_back(g_Monstros[v[i]]);
+        cartasjogador1->at(i).set_jogador(jogador1);
+        cartasjogador2->push_back(g_Monstros[v[i+6]]);
+        cartasjogador2->at(i).set_jogador(jogador2);
     }
 }
 

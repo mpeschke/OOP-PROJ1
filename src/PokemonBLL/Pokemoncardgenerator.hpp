@@ -16,5 +16,7 @@
 
 namespace BLL {
 
+void g_DistribuirCartas(const BLL::tstring jogador1, const BLL::tstring jogador2, std::vector<Pokemon>* cartasjogador1, std::vector<Pokemon>* cartasjogador2);
+
 void g_GerarRodadas(const BLL::tstring jogador1, const BLL::tstring jogador2, std::vector<Pokemonrodada>* rodadas);
 } /* namespace BLL */
