@@ -15,7 +15,9 @@ BOOST_AUTO_TEST_CASE(test_pokemon_vantagem_electric_over_water)
 {
     BOOST_TEST_MESSAGE( "TEST CENÁRIO VANTAGEM. Electric sobre Water." );
     Pokemon jogadorelectric = Pokemon(BLL::g_PikachuSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_PikachuSt.m_tipo == Tipo::Electric );
     Pokemon jogadorwater = Pokemon(BLL::g_TotodileSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_TotodileSt.m_tipo == Tipo::Water );
     BOOST_TEST ( jogadorelectric.temvantagem(jogadorwater) );
 }
 
@@ -23,7 +25,9 @@ BOOST_AUTO_TEST_CASE(test_pokemon_vantagem_water_over_fire)
 {
     BOOST_TEST_MESSAGE( "TEST CENÁRIO VANTAGEM. Water sobre Fire." );
     Pokemon jogadorwater = Pokemon(BLL::g_TotodileSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_TotodileSt.m_tipo == Tipo::Water );
     Pokemon jogadorfire = Pokemon(BLL::g_CharmanderSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_CharmanderSt.m_tipo == Tipo::Fire );
     BOOST_TEST ( jogadorwater.temvantagem(jogadorfire) );
 }
 
@@ -31,7 +35,9 @@ BOOST_AUTO_TEST_CASE(test_pokemon_vantagem_fire_over_grass)
 {
     BOOST_TEST_MESSAGE( "TEST CENÁRIO VANTAGEM. Fire sobre Grass." );
     Pokemon jogadorfire = Pokemon(BLL::g_CharmanderSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_CharmanderSt.m_tipo == Tipo::Fire );
     Pokemon jogadorgrass = Pokemon(BLL::g_BayleefSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_BayleefSt.m_tipo == Tipo::Grass );
     BOOST_TEST ( jogadorfire.temvantagem(jogadorgrass) );
 }
 
@@ -39,7 +45,9 @@ BOOST_AUTO_TEST_CASE(test_pokemon_vantagem_grass_over_electric)
 {
     BOOST_TEST_MESSAGE( "TEST CENÁRIO VANTAGEM. Grass sobre Electric." );
     Pokemon jogadorgrass = Pokemon(BLL::g_BayleefSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_BayleefSt.m_tipo == Tipo::Grass );
     Pokemon jogadorelectric = Pokemon(BLL::g_PikachuSt, Status::Ativo, "", Caracteristica::Agilidade);
+    BOOST_TEST ( BLL::g_PikachuSt.m_tipo == Tipo::Electric );
     BOOST_TEST ( jogadorgrass.temvantagem(jogadorelectric) );
 }
 
